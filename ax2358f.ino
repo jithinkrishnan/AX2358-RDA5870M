@@ -1,3 +1,26 @@
+/************************************************************************
+*   AX2358 6 Channel Volume control + RDA5807 FM radio Chip
+*   
+*   File:   ax2358f.ino
+*   Author:  Jithin Krishnan.K
+*       Rev. 1.0 : 00/01/2019 :  00:00 AM
+* 
+* This program is free software: you can redistribute it and/or modify
+*   it under the terms of the GNU General Public License as published by
+*   the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*
+* Email: jithinkrishnan.k@gmail.com
+*   
+************************************************************************/
 #include <radio.h>
 #include <RDA5807M.h>
 #include <RDSParser.h>
@@ -11,8 +34,6 @@ byte paramMixChBoost;
 byte paramMainVolume;
 byte paramVolumeOffsets[6];
 
-//long encPosition = INITIAL_ENCODER_POS;
-//Encoder encMain(ENC_A, ENC_B);
 IRrecv irReceiver(IR);
 decode_results res;
 RDA5807M radio;
@@ -22,17 +43,11 @@ void setup() {
     irReceiver.enableIRIn();
     Wire.begin();
     Serial.begin (9600);
-
-    //pinMode(LED_CLK, OUTPUT);
-    //pinMode(LED_DATA, OUTPUT);
-    //pinMode(LED_EN1, OUTPUT);
-    //pinMode(LED_EN2, OUTPUT);
-    //pinMode(MUTE_NEG, OUTPUT);
+    
     pinMode(ONBOARD_LED, OUTPUT);
     pinMode(POWER_ON_LED, OUTPUT);
     pinMode(POWER_OFF_LED, OUTPUT);
-
-    //delay(1000);
+    
     initAmp();
     initRadio();
 }
@@ -65,17 +80,6 @@ void initRadio() {
     
 // The loop function is called in an endvoid initAmp()less loop
 void loop() {
-  #if 0 // Encoder function not using commented by jithin
-    long encNew = encMain.read();
-    if (encNew != encPosition) {
-        if (encNew > encPosition && encNew % 4 != 0) {
-            increaseVolume();
-        } else if (encNew < encPosition && encNew % 4 != 0) {
-            decreaseVolume();
-        }
-        encPosition = encNew;
-    }
-  #endif // End of comment by jithin
     if (paramPower) {
         digitalWrite(POWER_ON_LED, LOW);
         digitalWrite(POWER_OFF_LED, HIGH);
@@ -228,12 +232,7 @@ void ax2358f(byte channel, byte value) {
 
 void handleInfrared(unsigned long decodedValue) {
   unsigned long startSeek;
-  //RADIO_FREQ fSave, fLast;
-  //RADIO_FREQ fMin = radio.getMinFrequency();
-  //RADIO_FREQ fMax = radio.getMaxFrequency();
-  //char sFreq[12];
-  //RADIO_INFO ri;
-  
+   
     if (ValidateIRCode(decodedValue)) {
         blinkLed();
     }      
