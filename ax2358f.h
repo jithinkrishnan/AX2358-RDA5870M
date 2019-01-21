@@ -1,14 +1,32 @@
+/************************************************************************
+*   
+*   File:   ax2358f.h.ino
+*   Author:  Jithin Krishnan.K
+* 
+* This program is free software: you can redistribute it and/or modify
+*   it under the terms of the GNU General Public License as published by
+*   the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*
+* Email: jithinkrishnan.k@gmail.com
+*   
+************************************************************************/
+
 #ifndef ax2358f_H_
 #define ax2358f_H_
 
 #include <IRremote.h>
-//#include <IRremoteInt.h>
-//#include <IRremoteTools.h>
 #include <Arduino.h>
 #include <Wire.h>
 #include <EEPROM.h>
-//#include <Encoder.h>
-
 
 //ax2358 definitions - 6CH Audio Processor
 #define AX2358F_ADDRESS      0x4A // Chip address - 0x94 >>1 => 0x4A 
