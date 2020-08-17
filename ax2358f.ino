@@ -260,8 +260,8 @@ void handleInfrared(unsigned long decodedValue) {
             paramInput = INPUT_AUX1;
             break;
         case IR_INPUT_AUX2:        
-            setInput(INPUT_AUX1);
-            paramInput = INPUT_AUX1;
+            setInput(INPUT_AUX2);
+            paramInput = INPUT_AUX2;
             break;
         case IR_INPUT_USB:      
             setInput(INPUT_USB);
